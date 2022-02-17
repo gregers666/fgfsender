@@ -69,7 +69,7 @@ def llh2ecef(lat, lon, alt):
     
     return [x,y,z]
 
-def ac_rotate(lat, lon, alt, hdg, angle_y, angle_z, vel, vs, turnrate):
+def ac_rotate(lat, lon, alt, angle_x, angle_y, angle_z, vel, vs, turnrate):
     #position, orientation, linear vel, angular vel, linear accel, angular accel (accels unused), 0
     #position is in ECEF format -- same as mlat uses. what luck!
     pos = llh2ecef(lat, lon, alt * 0.3048) #alt is in meters!
@@ -77,7 +77,7 @@ def ac_rotate(lat, lon, alt, hdg, angle_y, angle_z, vel, vs, turnrate):
     #get the rotation quaternion to rotate to local reference frame from lat/lon
     rotquat = Quat([lat, lon])
     #get the quaternion corresponding to aircraft orientation
-    acquat = Quat([hdg, angle_y, angle_z])
+    acquat = Quat([angle_x, angle_y, angle_z])
     #rotate aircraft into ECEF frame
     ecefquat = rotquat * acquat
     #get it in angle/axis representation
@@ -204,7 +204,7 @@ def pos_calc(airport_lat, airport_long, airport_height, kat_x, kat_y, kat_z):
     # 12b
     #hdgorientation float[3] Orientation wrt the earth centered frame, stored in the angle axis representation where the angle is coded into the axis length.
     #ORIENT = pymap3d.ecef2ned( pos_lat, pos_long, pos_height, kat_x, kat_y, kat_z,  ell=None, deg=True)
-    ORIENT = ac_rotate(airport_lat, airport_long, airport_height, hdg=180, angle_y=45, angle_z=0, vel=0, vs=0, turnrate=0)
+    ORIENT = ac_rotate(airport_lat, airport_long, airport_height, angle_x=kat_x, angle_y=kat_y, angle_z=kat_z, vel=0, vs=0, turnrate=0)
     print(f"ORIENT={ORIENT}")
 
     orient_x = ORIENT[0]
