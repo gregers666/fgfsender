@@ -1,3 +1,5 @@
 redis-server
 redis
-
+pymap3d
+walrus
+numpy

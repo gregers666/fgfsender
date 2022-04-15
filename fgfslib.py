@@ -116,9 +116,11 @@ def pos_msg(aircraft_lat, aircraft_long, aircraft_height, angle_x, angle_y, angl
     message += struct.pack('>I', replyPort)
 
     #8b
-    # max callsign lenght 8
+    # max callsign lenght 7
+    callsign = "{:<7}".format(callsign)
+    print("'"+callsign+"'")
     callsign = bytes(callsign, encoding='raw_unicode_escape')
-    message += callsign[:7]
+    message += callsign #[:7]
     message += __TT1# zero terminated
 
     #CHAT max 256b
