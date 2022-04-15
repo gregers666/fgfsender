@@ -18,7 +18,7 @@ from queue import Queue
 from pynput import keyboard
 import math
 from Quaternion import Quat
-from fgfsmp import pos_msg
+from fgfslib import pos_msg
 
 
 AC_LAT =  52.166
