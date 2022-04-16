@@ -117,10 +117,11 @@ def pos_msg(aircraft_lat, aircraft_long, aircraft_height, angle_x, angle_y, angl
 
     #8b
     # max callsign lenght 7
-    callsign = "{:<7}".format(callsign) # padding
-    callsign = bytes(callsign, encoding='raw_unicode_escape')
-    message += callsign[:7] # cutting
-    message += __TT1# zero terminated
+    callsign = "aaa"
+    callsign = bytes(callsign, encoding = 'raw_unicode_escape')
+    for i in range(1, 7 - len(callsign)):
+        callsign += b'\x00'
+    callsign += __TT1
 
     #CHAT max 256b
     #chat=bytes(CHAT, encoding='raw_unicode_escape')
