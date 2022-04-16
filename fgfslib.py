@@ -120,8 +120,9 @@ def pos_msg(aircraft_lat, aircraft_long, aircraft_height, angle_x, angle_y, angl
     callsign = bytes(callsign, encoding = 'raw_unicode_escape')
     for i in range(1, 7 - len(callsign)):
         callsign += b'\x00'
-    callsign += __TT1
-
+    message += callsign[:7]
+    message += __TT1
+    
     #CHAT max 256b
     #chat=bytes(CHAT, encoding='raw_unicode_escape')
     #message += chat[:256]
@@ -132,6 +133,7 @@ def pos_msg(aircraft_lat, aircraft_long, aircraft_height, angle_x, angle_y, angl
     model = bytes(model, encoding = 'raw_unicode_escape')
     for i in range(1, 96 - len(model)):
         model += b'\x00'
+#    print(model[:96])
     message += model[:96]
     message += __TT1 # zero terminated
 
