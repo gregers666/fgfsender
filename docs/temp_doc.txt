@@ -1,0 +1,27 @@
+FGFSENDER
+172.17.0.2
+UDP 5000
+
+inside docker
+
+FGMS
+172.17.0.2
+UDP 5000
+inside docker
+
+docker -it fgfs-gregers /bin/bash
+screen fgms
+ctrl a
+ctrl d
+disconnect from screen
+
+enable fgfsender
+
+FGFS
+./FlightGear-2020.3.11-x86_64.AppImage --fg-scenery=/media/gregers/GRY/FGFS/Poland --airport=EPWA --runway=15 --timeofday=noon --httpd=7777 --callsign=gregers --multiplay=in,10,192.168.1.16,5001 --multiplay=out,10,172.17.0.2,5000 --timeofday=noon --disable-random-objects --disable-real-weather-fetch --verbose --fg-aircraft=/media/gregers/GRY/FGFS/fgdata/Aircraft/737-200
+
+install aircraft models inside fgdata/Aircraft
+
+TODO
+
+Connect fgfsender with Redis using Walrus
