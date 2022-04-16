@@ -9,7 +9,9 @@
 
 CALLSIGN = 'SP-TWA'
 NAME = 'Samolot'
-MODEL = 'Aircraft/c172p/Models/c172p.xml'
+#MODEL = 'Aircraft/c172p/Models/c172p.xml'
+MODEL = '/media/gregers/GRY/FGFS/fgdata/Aircraft/737-200/Models/737-200.xml'
+
 CHAT = 'CHAT'
 REDIS_IP = "127.0.0.1"
 REDIS_PORT = 6379
@@ -53,13 +55,18 @@ test = {}
 airport = {}
 
 test[0] = {"ac_lat":AC_LAT, "ac_long":AC_LONG, "ac_height":AC_HEIGHT, "x":X, "y":Y, "z":Z, "callsign":CALLSIGN, "model":MODEL }
-#test[1] = {"ac_lat":AC_LAT+0.01, "ac_long":AC_LONG, "ac_height":AC_HEIGHT, "x":X, "y":Y, "z":Z, "callsign":"bubu", "model":MODEL }
+test[1] = {"ac_lat":AC_LAT+0.002, "ac_long":AC_LONG, "ac_height":AC_HEIGHT, "x":X, "y":Y, "z":Z, "callsign":"HANS", "model":MODEL }
+test[2] = {"ac_lat":AC_LAT+0.001, "ac_long":AC_LONG, "ac_height":AC_HEIGHT, "x":X, "y":Y, "z":Z, "callsign":"KLOSS", "model":MODEL }
+
 
 #airport[0] = db.Hash(0)
-airport[0] = test[0]
-
 #airport[1] = db.Hash(1)
-#airport[1] = test[1]
+
+airport[0] = test[0]
+airport[1] = test[1]
+airport[2] = test[2]
+
+
 print("Start")
 while 1:
     for ac in airport.items():

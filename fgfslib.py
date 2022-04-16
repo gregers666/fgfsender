@@ -129,10 +129,10 @@ def pos_msg(aircraft_lat, aircraft_long, aircraft_height, angle_x, angle_y, angl
 
     #96b
     #Model max length = 96b ie. "/model/foo/aero.xml" Name of the aircraft model.
-    model = bytes(model, encoding='raw_unicode_escape')
-    message += model[:96]
+    model = bytes(model, encoding = 'raw_unicode_escape')
     for i in range(1, 96 - len(model)):
-        message += b'\x00'
+        model += b'\x00'
+    message += model[:96]
     message += __TT1 # zero terminated
 
     #8b
