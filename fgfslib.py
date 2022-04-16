@@ -118,7 +118,7 @@ def pos_msg(aircraft_lat, aircraft_long, aircraft_height, angle_x, angle_y, angl
     #8b
     # max callsign lenght 7
     callsign = bytes(callsign, encoding = 'raw_unicode_escape')
-    for i in range(1, 7 - len(callsign)):
+    for i in range(1, 8 - len(callsign)):
         callsign += b'\x00'
     message += callsign[:7]
     message += __TT1
