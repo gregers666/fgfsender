@@ -55,13 +55,13 @@ airport = {}
 test[0] = {"ac_lat":AC_LAT, "ac_long":AC_LONG, "ac_height":AC_HEIGHT, "x":X, "y":Y, "z":Z, "callsign":CALLSIGN, "model":MODEL }
 #test[1] = {"ac_lat":AC_LAT+0.01, "ac_long":AC_LONG, "ac_height":AC_HEIGHT, "x":X, "y":Y, "z":Z, "callsign":"bubu", "model":MODEL }
 
-airport[0] = db.Hash(0)
+#airport[0] = db.Hash(0)
 airport[0] = test[0]
 
 #airport[1] = db.Hash(1)
 #airport[1] = test[1]
-
+print("Start")
 while 1:
     for ac in airport.items():
-        print(ac[1])
+#        print(ac[1])
         go( ac[1]["ac_lat"], ac[1]["ac_long"], ac[1]["ac_height"], ac[1]["x"], ac[1]["y"], ac[1]["z"], ac[1]["callsign"], ac[1]["model"], UDP_IP, UDP_PORT )

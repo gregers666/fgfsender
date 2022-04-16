@@ -117,10 +117,9 @@ def pos_msg(aircraft_lat, aircraft_long, aircraft_height, angle_x, angle_y, angl
 
     #8b
     # max callsign lenght 7
-    callsign = "{:<7}".format(callsign)
-    print("'"+callsign+"'")
+    callsign = "{:<7}".format(callsign) # padding
     callsign = bytes(callsign, encoding='raw_unicode_escape')
-    message += callsign #[:7]
+    message += callsign[:7] # cutting
     message += __TT1# zero terminated
 
     #CHAT max 256b
@@ -132,7 +131,7 @@ def pos_msg(aircraft_lat, aircraft_long, aircraft_height, angle_x, angle_y, angl
     #Model max length = 96b ie. "/model/foo/aero.xml" Name of the aircraft model.
     model = bytes(model, encoding='raw_unicode_escape')
     message += model[:96]
-    for i in range(1, 96 -len(model)):
+    for i in range(1, 96 - len(model)):
         message += b'\x00'
     message += __TT1 # zero terminated
 
