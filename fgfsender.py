@@ -33,14 +33,16 @@ import struct
 import pymap3d
 import binascii
 
-from queue import Queue
+#from queue import Queue
 import math
 from Quaternion import Quat
 from fgfslib import pos_msg
-from walrus import *
+from redisworks import Root
 
-db = Walrus(host = REDIS_IP, port = REDIS_PORT, db = REDIS_DB)
-queue = Queue()
+
+
+root = Root()
+#queue = Queue()
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) #UDP
 
 
@@ -52,23 +54,23 @@ def go(ac_lat, ac_long, ac_height, x, y, z, callsign, model, udp_ip, udp_port):
 
 
 test = {}
-airport = {}
+root.flush()
+root.airport[0] = {0:0} # strange init redisworks
 
-test[0] = {"ac_lat":AC_LAT, "ac_long":AC_LONG, "ac_height":AC_HEIGHT, "x":X, "y":Y, "z":Z, "callsign":CALLSIGN, "model":MODEL }
-test[1] = {"ac_lat":AC_LAT+0.002, "ac_long":AC_LONG, "ac_height":AC_HEIGHT, "x":X, "y":Y, "z":Z, "callsign":"HANS", "model":MODEL }
-test[2] = {"ac_lat":AC_LAT+0.001, "ac_long":AC_LONG, "ac_height":AC_HEIGHT, "x":X, "y":Y, "z":Z, "callsign":"KLOSS", "model":MODEL }
+for x in range(0, 30):
+    test[x] = {"ac_lat":AC_LAT-x/1000, "ac_long":AC_LONG, "ac_height":AC_HEIGHT+x*10, "x":X, "y":Y, "z":Z, "callsign":str(x), "model":MODEL }
+    root.airport[x] = test[x]
 
 
-#airport[0] = db.Hash(0)
-#airport[1] = db.Hash(1)
-
-airport[0] = test[0]
-airport[1] = test[1]
-airport[2] = test[2]
+#root.airport[0] = test[0]
+#root.airport[1] = test[1]
+#root.airport[2] = test[2]
 
 
 print("Start")
 while 1:
-    for ac in airport.items():
-#        print(ac[1])
-        go( ac[1]["ac_lat"], ac[1]["ac_long"], ac[1]["ac_height"], ac[1]["x"], ac[1]["y"], ac[1]["z"], ac[1]["callsign"], ac[1]["model"], UDP_IP, UDP_PORT )
+    try:
+        for ac in root.airport:
+            go( ac["ac_lat"], ac["ac_long"], ac["ac_height"], ac["x"], ac["y"], ac["z"], ac["callsign"], ac["model"], UDP_IP, UDP_PORT )
+    except KeyError as k:
+        pass
