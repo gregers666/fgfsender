@@ -1,4 +1,4 @@
-redis-server
+redisworks
 redis
 pymap3d
 walrus

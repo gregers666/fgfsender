@@ -1,0 +1,34 @@
+fgfsender.py should show 20 aircraft near EPWA (Warsaw Chopin Airport)
+
+Install redis-server
+sudo apt install redis redis-server
+make it listening on localhost 6379
+by sudo editing /etc/redis/redis.conf - add line
+bind 127.0.0.1 ::1
+
+restart redis:
+sudo systemctl restart redis
+
+You may check it by:
+telnet localhost 6379
+(quit ctrl ] than close)
+
+python3 -m venv venv
+pip3 install -r requirements.txt
+
+Download and install fgms
+https://fgms.freeflightsim.org/
+
+Update fgms.conf server.address to mirror your computer ip
+make it daemon
+server.daemon = true
+Run fgms as a daemon: ./fgms -D
+you may login admin/admin
+
+Run fgfs connecting to fgms - example batch file epwa.sh
+
+run fgfsender.py in another terminal session
+
+In fgfs change to tower view (keyboard-shortcut 'v'/shift 'v')
+https://wiki.flightgear.org/Keyboard_shortcuts
+multiplayer -> list of pilots should show 20 aircraft - if not check multiplayer server settings

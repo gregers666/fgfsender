@@ -16,7 +16,7 @@ CHAT = 'CHAT'
 REDIS_IP = "127.0.0.1"
 REDIS_PORT = 6379
 REDIS_DB = 0
-UDP_IP = "172.17.0.2"
+UDP_IP = "192.168.1.10"
 UDP_PORT = 5000
 
 AC_LAT =  52.166
@@ -41,7 +41,9 @@ from redisworks import Root
 
 
 
-root = Root()
+
+root = Root(host='localhost', port=6379, db=0)
+
 #queue = Queue()
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) #UDP
 
